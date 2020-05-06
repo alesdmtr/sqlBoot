@@ -21,7 +21,7 @@ public class controller {
     @Autowired
     private findBooks bookService;
     @RequestMapping("/books")
-    public List<Book> findCities() {
+    public List<Book> findBooks() {
         return bookService.findAll();
     }
     @RequestMapping(value="/books/getBook", method = RequestMethod.GET)
