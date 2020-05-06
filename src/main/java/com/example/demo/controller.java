@@ -24,10 +24,9 @@ public class controller {
     public List<Book> findCities() {
         return bookService.findAll();
     }
-    @RequestMapping("/books/getBook?bookId={bookId}")
-    public Book findCity(@PathVariable Long bookId) {
-
-        return bookService.findById(bookId);
+    @RequestMapping(value="/books/getBook", method = RequestMethod.GET)
+    public Book findBook(@RequestParam("bookId") String bookId) {
+        return bookService.findById(Long.parseLong(bookId));
     }
     @GetMapping("/")
     public String homePage(Model model) {
