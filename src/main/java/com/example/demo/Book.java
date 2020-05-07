@@ -39,7 +39,7 @@ public class Book {
         return Author;
     }
 
-    public void setAuthor(String population) {
+    public void setAuthor(String Author) {
         this.Author = Author;
     }
 
@@ -47,10 +47,10 @@ public class Book {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Book city = (Book) o;
-        return Author == city.Author &&
-                Objects.equals(id, city.id) &&
-                Objects.equals(name, city.name);
+        Book book = (Book) o;
+        return Author == book.Author &&
+                Objects.equals(id, book.id) &&
+                Objects.equals(name, book.name);
     }
 
     @Override

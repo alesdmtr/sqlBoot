@@ -6,5 +6,6 @@ import java.util.List;
 
         List<Book> findAll();
         Book findById(Long id);
+        void insertBook(String name, String author);
     }
 

@@ -23,10 +23,22 @@ public class findBooks implements FindBook {
 
     @Override
     public Book findById(Long id) {
-
         String sql = "SELECT * FROM books WHERE id = ?";
 
         return jtm.queryForObject(sql, new Object[]{id},
                 new BeanPropertyRowMapper<>(Book.class));
+    }
+
+    @Override
+    public void insertBook(String name, String author) {
+        //MapSqlParameterSource params = new MapSqlParameterSource();
+        String sql = "INSERT INTO books(name, author) VALUES (?, ?)";
+        Object[] params = new Object[] {name, author};
+
+        jtm.update(sql, params);
+        //params.addValue("firstName", firstName);
+        //params.addValue("lastName", lastName);
+        //params.addValue("age", age);
+        //jdbcTemplate.update(SQL_INSERT_PROFILE, params);
     }
 }

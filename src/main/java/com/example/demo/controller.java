@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -22,20 +23,24 @@ public class controller {
     private findBooks bookService;
     @RequestMapping("/books")
     public List<Book> findBooks() {
+        String error = "Malformed JSON request";
         return bookService.findAll();
     }
     @RequestMapping(value="/books/getBook", method = RequestMethod.GET)
     public Book findBook(@RequestParam("bookId") String bookId) {
         return bookService.findById(Long.parseLong(bookId));
     }
-    @GetMapping("/")
-    public String homePage(Model model) {
-        model.addAttribute("appName", appName);
-        return "home";
-    }
-    @RequestMapping(value = "/controller", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/books/addbook", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity sendViaResponseEntity() {
-        return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity(HttpStatus.NOT_IMPLEMENTED);
     }
+
+    @PostMapping(path = "/members", consumes = "application/json", produces = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createProfile(@Valid @RequestBody Book book) {
+        bookService.insertBook(book.getName(), book.getAuthor());
+    }
+
 }
