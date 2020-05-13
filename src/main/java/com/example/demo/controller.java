@@ -23,12 +23,17 @@ public class controller {
     private findBooks bookService;
     @RequestMapping("/books")
     public List<Book> findBooks() {
-        String error = "Malformed JSON request";
         return bookService.findAll();
     }
+
     @RequestMapping(value="/books/getBook", method = RequestMethod.GET)
     public Book findBook(@RequestParam("bookId") String bookId) {
         return bookService.findById(Long.parseLong(bookId));
+    }
+
+    @RequestMapping(value="/books/deleteBook", method = RequestMethod.GET)
+    public void deleteBook(@RequestParam("bookId") String bookId) {
+        bookService.deleteById(Long.parseLong(bookId));
     }
 
     @RequestMapping(value = "/books/addbook", method = RequestMethod.POST)
